@@ -47,38 +47,68 @@ void LLInsertINTO(List *hrf, int data, int pos){
 	
 	if(pos==1){
 		LLInsertFRONT(hrf, data);
-		return;
+	}else{
+		while(*hrf != NULL && count!=pos-1){
+			count++;
+			hrf=&(*hrf)->link;
+		}
+		neww->link = (*hrf)->link;
+		(*hrf)->link=neww;
 	}
 	
-	while(*hrf != NULL && count!=pos-1){
-		count++;
-		hrf=&(*hrf)->link;
-	}
 	
-	neww->link = (*hrf)->link;
-	(*hrf)->link=neww;
 	
 }
 
 void LLDeleteATPos(List *hrf, int pos){
     int count=1;
+    List delitem;
+    if(pos==1){
+        delitem=(*hrf);
+        *hrf=(*hrf)->link;
+        free(delitem);
+    }else{
+    	while(*hrf != NULL && count!=pos-1){
+        	count++;
+        	hrf=&(*hrf)->link;
+    	}
     
-//    if(pos==1){
-//        (*hrf)->link = (*hrf)->link->link;
-//    }
-    
-    while(*hrf != NULL && count!=pos-1){
-        count++;
-        hrf=&(*hrf)->link;
-    }
-    
-    List delitem = (*hrf)->link;
+	    delitem = (*hrf)->link;
+	    (*hrf)->link=(*hrf)->link->link;
+	    free(delitem);
+	}
     
     
-    (*hrf)->link=(*hrf)->link->link;
+}
+
+void LLDeleteOccurence(List *hrf, int data){
+	while(*hrf!=NULL){
+		if((*hrf)->item == data){
+			List delitem=(*hrf);
+	        *hrf=(*hrf)->link;
+	        free(delitem);
+		}else{
+			hrf=&(*hrf)->link;
+		}
+	}
+}
+
+void LLdeleteFRONT(List *hrf){
+	List delitem=(*hrf);
+    *hrf=(*hrf)->link;
     free(delitem);
 }
 
-void LLDeleteOccurence(List *h, int data){
-	while(*hrf!=NULL && (*hrf)->data)
+void LLdeleteEND(List *hrf){
+	while((*hrf)->link->link!=NULL){
+		hrf=&(*hrf)->link;
+	}
+	
+	List delitem=(*hrf)->link;
+	(*hrf)->link=NULL;
+	free(delitem);
+	
+	
 }
+
+

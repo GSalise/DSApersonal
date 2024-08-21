@@ -2,7 +2,8 @@
 #include <stdlib.h>
 //#include "staticarr.h"
 //#include "dynamicarr.h"
-#include "single.h"
+//#include "single.h"
+#include "doubly.h"
 
 int main(){
 //	List test;
@@ -43,17 +44,33 @@ int main(){
 //	DAdisplay(test);
 	
 	
-	List test=NULL;
-	LLInsertEND(&test, 10);
-	LLInsertEND(&test, 20);
-	LLInsertEND(&test, 30);
-	LLInsertFRONT(&test, 99);
-	LLInsertFRONT(&test, 88);
-	LLInsertFRONT(&test, 77);
-	LLInsertINTO(&test, 0, 3);
-	LLDeleteATPos(&test, 3);
-	LLdisplay(test);
+//	List test=NULL;
+//	LLInsertEND(&test, 10);
+//	LLInsertEND(&test, 20);
+//	LLInsertEND(&test, 30);
+//	LLInsertFRONT(&test, 99);
+//	LLInsertFRONT(&test, 88);
+//	LLInsertFRONT(&test, 77);
+//	LLInsertINTO(&test, 0, 3);
+//	LLInsertINTO(&test, 0, 2);
+//	LLInsertINTO(&test, 0, 5);
+//	LLInsertEND(&test, 0);
+//	LLInsertFRONT(&test, 1);
+//	LLDeleteATPos(&test, 1);
+//	LLDeleteOccurence(&test, 0);
+//	LLdeleteFRONT(&test);
+//	LLdeleteEND(&test);
+//	LLdisplay(test);
 	
+	List head=NULL;
+	List tail=NULL;
+	DDInsertEND(&head, &tail, 10);
+	DDInsertEND(&head, &tail, 20);
+	DDInsertEND(&head, &tail, 30);
+	DDInsertFRONT(&head, &tail, 0);
+	DDInsertINTO(&head, 99, 2);
+	DDInsertINTO(&head, 88, 4);
+	DDdisplay(&head);
 	
 	
 	return 0;
