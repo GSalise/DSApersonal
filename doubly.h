@@ -6,9 +6,13 @@
      struct node *next, *prev;
  } NodeType, *NodePtr, *List;
  
- void DDdisplay(List *hrf);
+ void DDdisplay(List *hrf, List *trf);
  void DDInsertEND(List *hrf, List *trf, int data);
  void DDInsertFRONT(List *hrf, List *trf, int data);
- void DDInsertINTO(List *hrf, int data, int pos);
+ void DDInsertINTO(List *hrf, List *trf, int data, int pos);
+ void DDDeleteAtPos(List *hrf, List *trf, int pos);
+ void DDdeleteOccurence(List *hrf, List *trf, int data);
+ void DDdeleteFRONT(List *hrf);
+ void DDdeleteEND(List *trf);
  
 #endif

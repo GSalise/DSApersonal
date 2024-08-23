@@ -6,6 +6,8 @@
 #include "doubly.h"
 
 int main(){
+	
+	//STATIC ARRAY
 //	List test;
 //	test.count=0;
 //	
@@ -25,6 +27,7 @@ int main(){
 //	test=deleteEnd(test);
 //	display(test);
 
+	//DYNAMIC ARRAY 
 //	List test;
 //	test.count=0;
 //	DAdisplay(test);
@@ -43,7 +46,7 @@ int main(){
 //	test=DAdeleteEnd(test);
 //	DAdisplay(test);
 	
-	
+	//Singly LL
 //	List test=NULL;
 //	LLInsertEND(&test, 10);
 //	LLInsertEND(&test, 20);
@@ -62,39 +65,30 @@ int main(){
 //	LLdeleteEND(&test);
 //	LLdisplay(test);
 	
+	//Doubly LL
 	List head=NULL;
 	List tail=NULL;
 	DDInsertEND(&head, &tail, 10);
 	DDInsertEND(&head, &tail, 20);
 	DDInsertEND(&head, &tail, 30);
 	DDInsertFRONT(&head, &tail, 0);
-	DDInsertINTO(&head, 99, 2);
-	DDInsertINTO(&head, 88, 4);
-	DDdisplay(&head);
+	DDInsertFRONT(&head, &tail, 1);
+	DDInsertFRONT(&head, &tail, 2);
+	DDInsertEND(&head, &tail, 0);
+	DDInsertINTO(&head, &tail, 99, 5);
+	DDInsertINTO(&head, &tail, 88, 4);
+	DDInsertINTO(&head, &tail, 0, 3);
+	DDInsertINTO(&head, &tail, 0, 7);
+	DDInsertINTO(&head, &tail, 0, 5);
+	DDInsertFRONT(&head, &tail, 0);
+	DDDeleteAtPos(&head, &tail, 6);
+	DDdeleteOccurence(&head, &tail, 0);
+	DDdeleteFRONT(&head);
+	DDdeleteEND(&tail);
+	DDInsertINTO(&head, &tail, 100, 2);
+	DDdisplay(&head, &tail);
 	
 	
 	return 0;
 }
-// typedef struct {
-//     int items[MAX];
-//     int count;
-// } List;
 
-
-// typedef struct {
-//     int *items;
-//     int count;
-//     int max;
-// } List;
-
-
-// typedef struct node {
-//     int item;
-//     struct node *link;
-// } NodeType, *NodePtr, *List;
-
-
-// typedef struct node {
-//     int item;
-//     struct node *next, *prev;
-// } NodeType, *NodePtr, *List;
