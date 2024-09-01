@@ -9,6 +9,8 @@ void initStack(Stack *s){
 Stack createStack(){
 	Stack neww;
 	neww.count=0;
+	
+	return neww;
 }
 
 bool isEmpty(Stack s){
@@ -19,7 +21,7 @@ bool isEmpty(Stack s){
 }
 
 bool isFull(Stack s){
-	if(s.count==MAX){
+	if(s.count>=MAX){
 		return true;
 	}
 	return false;
