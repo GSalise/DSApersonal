@@ -34,7 +34,7 @@ void makeNull(Queue *q){
 
 void display(Queue q){
 	while(!isEmpty(q)){
-		printf("%d ", q.head->elem.studID);
+		printf("%s ", q.head->elem.studName.lname);
 		NodeType *delitem;
 		delitem = q.head;
 		q.head=q.head->link;
@@ -45,7 +45,7 @@ void display(Queue q){
 
 void visualize(Queue q){
 	while(q.head!=NULL){
-		printf("%d ", q.head->elem.studID);
+		printf("%s ", q.head->elem.studName.lname);
 		q.head=q.head->link;
 	}
 	
@@ -87,7 +87,18 @@ Name *getStudent(Queue q, char *program, char sex){
 	
 	Name *stud = malloc(10 * sizeof(Name));
 	int i=0;
-
+	
+	if((strcmp(program, " ")!=0) && sex != ' '){
+		while(q.head!=NULL){
+			if(q.head->elem.sex == sex && strcmp(q.head->elem.program, program) == 0){
+				stud[i] = q.head->elem.studName;
+				i++;
+			}
+			dequeue(&q);
+		}
+	}
+	
+	
 	if(strcmp(program, " ") == 0){
 		while(q.head!=NULL){
 			if(q.head->elem.sex == sex){
@@ -104,7 +115,7 @@ Name *getStudent(Queue q, char *program, char sex){
 			}
 			dequeue(&q);
 		}
-	}
+	} 
 	
 	strcpy(stud[i].fname, " ");
 	strcpy(stud[i].lname, " "); 
@@ -112,4 +123,30 @@ Name *getStudent(Queue q, char *program, char sex){
 	return stud;
 }
 
-bool insertSorted(Queue q, Data d);
+bool insertSorted(Queue *q, Data d){
+	Queue temp;
+	initQueue(&temp);
+	
+	if(isEmpty(*q)){
+		enqueue(q, d);
+	}else{
+		while(!isEmpty(*q) && strcmp(q->head->elem.studName.lname, d.studName.lname) < 0){
+			if(strcmp(q->head->elem.studName.lname, d.studName.lname) < 0){
+				enqueue(&temp, q->head->elem);
+				dequeue(q);
+			}
+		}
+		enqueue(&temp, d);
+		
+		while(!isEmpty(*q)){
+			enqueue(&temp, q->head->elem);
+			dequeue(q);
+		}
+		
+		*q = temp;
+	}
+	
+
+	
+	
+}

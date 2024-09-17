@@ -28,6 +28,6 @@ bool dequeue(Queue *q);
 Data front(Queue q);
 
 Name *getStudent(Queue q, char *program, char sex);
-bool insertSorted(Queue q, Data d);
+bool insertSorted(Queue *q, Data d);
 
 #endif

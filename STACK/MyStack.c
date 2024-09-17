@@ -57,25 +57,34 @@ bool isFound(Stack s, int data){
 }
 
 Stack removeEven(Stack *s){
+//	Stack even;
+//	initStack(&even);
+//	Stack temp;
+//	initStack(&temp);
+//	
+//	while(!isEmpty(*s)){
+//		if(peek(*s)%2==0){
+//			push(&even, peek(*s));
+//		}else{
+//			push(&temp, peek(*s));
+//		}
+//		pop(s);
+//	}
+//	
+//	while(!isEmpty(temp)){
+//		push(s, peek(temp));
+//		pop(&temp);
+//	}
+
 	Stack even;
 	initStack(&even);
-	Stack temp;
-	initStack(&temp);
 	
 	while(!isEmpty(*s)){
-		if(peek(*s)%2==0){
+		if(peek(*s)%2 == 0){
 			push(&even, peek(*s));
-		}else{
-			push(&temp, peek(*s));
 		}
 		pop(s);
 	}
-	
-	while(!isEmpty(temp)){
-		push(s, peek(temp));
-		pop(&temp);
-	}
-	
 	
 	return even;
 }

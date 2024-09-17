@@ -62,21 +62,39 @@ int main(){
 	
 	
 	
-	enqueue(&list, stud1);
-	enqueue(&list, stud2);
-	enqueue(&list, stud3);
-	enqueue(&list, stud4);
-	enqueue(&list, stud5);
+//	enqueue(&list, stud1);
+//	enqueue(&list, stud2);
+//	enqueue(&list, stud3);
+//	enqueue(&list, stud4);
+//	enqueue(&list, stud5);
 	printf("Is queue empty? %d\n\n", isEmpty(list));
-	Name *test = getStudent(list, "BSCS", ' ');
-	
-	int i=0;
-	while(strcmp(test[i].fname, " ") != 0 && strcmp(test[i].lname, " ") != 0){
-		printf("%s\n", test[i].fname);
-		i++;
-	}
+//	Name *test = getStudent(list, "BSIT", 'm');
+//	
+//	int i=0;
+//	while(strcmp(test[i].fname, " ") != 0 && strcmp(test[i].lname, " ") != 0){
+//		printf("%s\n", test[i].fname);
+//		i++;
+//	}
 	
 //	display(list);
 //	visualize(list);
+
+	insertSorted(&list, stud1);
+	visualize(list);
+	printf("\n\n\n");
+	insertSorted(&list, stud2);
+	visualize(list);
+	printf("\n\n\n");
+	insertSorted(&list, stud3);
+	visualize(list);
+	printf("\n\n\n");
+	insertSorted(&list, stud4);
+	visualize(list);
+	printf("\n\n\n");
+	insertSorted(&list, stud5);
+	visualize(list);
+
+	//display(list);
+	
 	return 0; 	
 }
