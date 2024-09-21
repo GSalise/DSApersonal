@@ -16,11 +16,13 @@
 
 ![image](https://github.com/user-attachments/assets/66cf0711-aa6e-4f3e-818c-01c6d6dd9a47)
 
-# Second While Loop
+# Adding NodePtr neww to Inventory "i"
 
 ![image](https://github.com/user-attachments/assets/d3ac39c5-416c-4609-8e4c-e1fafdf88cc7)
 
 ![image](https://github.com/user-attachments/assets/316b755b-3104-4309-869e-525a89d0d031)
+
+# Second While Loop
 
 ![image](https://github.com/user-attachments/assets/ec049aae-0bff-4a5b-ac4f-70306eb56448)
 
