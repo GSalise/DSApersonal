@@ -14,7 +14,7 @@
 
 # After the While Loop Ends
 
-![image](https://github.com/user-attachments/assets/66cf0711-aa6e-4f3e-818c-01c6d6dd9a47)
+![image](https://github.com/user-attachments/assets/48697a0c-c48a-49ec-9958-58aec98d61c3)
 
 # Adding NodePtr neww to Inventory "i"
 
