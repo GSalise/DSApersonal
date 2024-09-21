@@ -32,20 +32,20 @@ int main(){
 	initNQueue(&A);
 	printf("Is A Empty? %d\n", isEmpty(A));
 	printf("Is A Full? %d\n", isFull(A));
-	enqueue(&A, a);
-	enqueue(&A, b);
-	enqueue(&A, c);
-	enqueue(&A, d);
+//	enqueue(&A, a);
+//	enqueue(&A, b);
+//	enqueue(&A, c);
+//	enqueue(&A, d);
 //	enqueue(&A, e);
-//	insertSorted(&A, a);
-//	displayQueue(A);
-//	insertSorted(&A, b);
-//	displayQueue(A);
-//	insertSorted(&A, c);
-//	displayQueue(A);
-//	insertSorted(&A, d);
-//	displayQueue(A);
-//	insertSorted(&A, e);
+	insertSorted(&A, a);
+	displayQueue(A);
+	insertSorted(&A, b);
+	displayQueue(A);
+	insertSorted(&A, c);
+	displayQueue(A);
+	insertSorted(&A, d);
+	displayQueue(A);
+	insertSorted(&A, e);
 	displayQueue(A);
 	
 //	Name *filtered = filterNames(&A, "Salise");
@@ -56,9 +56,9 @@ int main(){
 //	}
 //	printf("--------------------------\n");
 	
-	printf("\n\n\n");
-	insertSorted(&A, e);
-	displayQueue(A);
+//	printf("\n\n\n");
+//	insertSorted(&A, e);
+//	displayQueue(A);
 	
 	
 	return 0;

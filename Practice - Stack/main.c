@@ -36,11 +36,11 @@ int main (){
 	strcpy(e.name, "D");
 	e.sex = 'f';
 	
-	push(&s, a);
-	push(&s, b);
-	push(&s, c);
-	push(&s, d);
-	push(&s, e);
+//	push(&s, a);
+//	push(&s, b);
+//	push(&s, c);
+//	push(&s, d);
+//	push(&s, e);
 
 
 //	insertSorted1(&s, a);
@@ -54,23 +54,23 @@ int main (){
 //	insertSorted1(&s, e);
 //	displayStack(s);
 	
+
+	insertSorted2(&t, a);
+	displayStack(t);
+	insertSorted2(&t, b);
+	displayStack(t);
+	insertSorted2(&t, c);
+	displayStack(t);
+	insertSorted2(&t, d);
+	displayStack(t);
+	insertSorted2(&t, e);
+	displayStack(t);
 	
-//	insertSorted2(&t, a);
-////	displayStack(t);
-//	insertSorted2(&t, b);
-////	displayStack(t);
-//	insertSorted2(&t, c);
-////	displayStack(t);
-//	insertSorted2(&t, d);
-////	displayStack(t);
-//	insertSorted2(&t, e);
-//	displayStack(t);
-	
-	displayStack(s);
-	sortStack(&s, true);
-	displayStack(s);
-	sortStack(&s, false);
-	displayStack(s);
+//	displayStack(s);
+//	sortStack(&s, true);
+//	displayStack(s);
+//	sortStack(&s, false);
+//	displayStack(s);
 	
 	return 0;
 }

@@ -83,62 +83,36 @@ bool insertSorted2(Stack *s, Person p){
 	Stack temp;
 	initStack(&temp);
 	
-	NodePtr holder;
+	NodePtr neww = malloc(sizeof(NodeType));
+	neww->data = p;
 	
+
 	if(!isEmpty(*s)){
+		NodePtr hold;
 		
-		if(strcmp((*s)->data.name, p.name) < 0){
-			
-			while(!isEmpty(*s) && strcmp((*s)->data.name, p.name) < 0){
-				
-				holder = malloc(sizeof(NodeType));
-				holder->data = (*s)->data;
-				holder->link=NULL; 
-
-				if(isEmpty(temp)){
-					temp = holder;
-				}else{
-					holder->link = temp;
-					temp = holder;
-				}
-				
-				holder = NULL;
-				*s = (*s)->link;
-				
-			}
-			
-			holder = malloc(sizeof(NodeType));
-			holder->data = p;
-			holder->link = *s;
-			*s = holder;
-			
-			
-			while(!isEmpty(temp)){
-				holder = NULL;
-				holder = malloc(sizeof(NodeType));
-
-				holder->data=temp->data;
-				holder->link = *s;
-				
-				*s = holder;
-				temp = temp->link;
-			}	
-			
-		}else{
-			holder = malloc(sizeof(NodeType));
-			holder->data = p;
-			holder->link = *s;
-			*s = holder;
+		while((*s)!=NULL && (strcmp((*s)->data.name, p.name) < 0)){
+			hold = (*s)->link;
+			(*s)->link = temp;
+			temp = (*s);
+			(*s) = hold;
 		}
-	
+		
+		neww->link = *s;
+		*s = neww;
+		
+		while(temp!=NULL){
+			
+			hold = temp->link;
+			temp->link = *s;
+			*s = temp;
+			temp = hold;
+		}
+		
 	}else{
-		holder = malloc(sizeof(NodeType));
-		holder->data = p;
-		holder->link = NULL;
-		*s = holder;
+		neww->link = *s;
+		*s = neww;
 	}
-	
-	
+		
 }
 
 /*Sort the values based on name. Use flag for ascending 
@@ -168,14 +142,7 @@ void sortStack(Stack *s, bool flag){
 		
 	}
 	
-	*s = temp;
-	
-	
-	
-	
-	
-	
-	
+	*s = temp;	
 	
 }
 
