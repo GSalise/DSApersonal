@@ -51,14 +51,14 @@ int main(){
 //	Name *filtered = filterNames(&A, "Salise");
 //	
 //	printf("\n--------------------------\n");
-//	for(int i = 0; strcmp(filtered[i].fname, " ") != 0; i++){
+//	for(int i = 0; strcmp(filtered[i].fname, "Sentinel") != 0; i++){
 //		printf("%s %s\n", filtered[i].fname, filtered[i].lname);
 //	}
 //	printf("--------------------------\n");
 	
 //	printf("\n\n\n");
-//	insertSorted(&A, e);
-//	displayQueue(A);
+	insertSorted(&A, e);
+	displayQueue(A);
 	
 	
 	return 0;

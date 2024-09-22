@@ -57,22 +57,23 @@ Name front(NQueue nq){
   fname and lname. If there are no names that will match then the
   function should return the sentinel.*/
 Name *filterNames(NQueue *nq, char *filterString){
-	Name *filter = malloc(sizeof(Name) * MAX);
-	int i = 0;
+	Name *neww = malloc(sizeof(Name) * 5);
+	
+	int i=0;
 	
 	while(!isEmpty(*nq)){
-		if(strcmp(nq->elems[nq->front].lname, filterString) == 0){
-			strcpy(filter[i].fname, nq->elems[nq->front].fname);
-			strcpy(filter[i].lname, nq->elems[nq->front].lname);
-			++i;
+		if(strcmp(front(*nq).lname, filterString) == 0){
+			neww[i] = front(*nq);
+			i++;
 		}
-		dequeue(&(*nq));
+		dequeue(nq);
 	}
 	
-	strcpy(filter[i].fname, " ");
-	strcpy(filter[i].lname, " ");
 	
-	return filter;
+	strcpy(neww[i].fname, "Sentinel");
+	strcpy(neww[i].lname, "Sentinel");
+	
+	return neww;
 }
 
 /*Insert soreted base on lastname. Rember to use the property 
@@ -81,29 +82,31 @@ bool insertSorted(NQueue *nq, Name n){
 	NQueue temp;
 	initNQueue(&temp);
 	
-	bool isInserted = false; 
+	if(isFull(*nq)){
+		return false;
+	}
 	
 	if(!isEmpty(*nq)){
-		while(!isEmpty(*nq)){
-		if(!isInserted && strcmp(nq->elems[nq->front].lname , n.lname) > 0 ){
-			temp.rear = (temp.rear + 1) % MAX;
-			temp.elems[temp.rear] = n;
-			isInserted = true;
-		}
+		while(!isEmpty(*nq) && strcmp(nq->elems[nq->front].lname, n.lname) < 0){
 			temp.rear = (temp.rear + 1) % MAX;
 			temp.elems[temp.rear] = nq->elems[nq->front];
 			nq->front = (nq->front + 1) % MAX;
 		}
 		
-		if(!isInserted){
+		temp.rear = (temp.rear + 1) % MAX;
+		temp.elems[temp.rear] = n;
+		
+		while(!isEmpty(*nq)){
 			temp.rear = (temp.rear + 1) % MAX;
-			temp.elems[temp.rear] = n;
-		}
+			temp.elems[temp.rear] = nq->elems[nq->front];
+			nq->front = (nq->front + 1) % MAX;
+		}	
 		
 		*nq = temp;
 	}else{
 		nq->rear = (nq->rear + 1) % MAX;
-		nq->elems[nq->rear]=n;
+		nq->elems[nq->rear] = n; 
 	}
 	
+	return true;
 }
