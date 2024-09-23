@@ -27,7 +27,7 @@ typedef struct{
 	NodePtr elems[MAX];
 	int count;
 }Dictionary;
-
+//curr->link!=NULL && strcmp(curr->stud.studName, s.studName) < 0
 
 int getHash(Student s);
 void initDictionary(Dictionary *d);

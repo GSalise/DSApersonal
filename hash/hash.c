@@ -49,20 +49,25 @@ bool addStudent(Dictionary *d, Student s){
 	neww->link = NULL;
 	neww->stud = s;
 	
-	
-	
-	
 	if(d->elems[val] == NULL){
 		d->elems[val] = neww;
-		printf("a");
 	}else{
-		int id = d->elems[val]->stud.studID;
 		NodePtr curr = d->elems[val];
-		while(curr->link != NULL && id < s.studID){
-			curr = curr->link;
+		NodePtr prev;
+		
+		while(curr!=NULL && curr->stud.studID > s.studID){
+			prev = curr;
+			curr=curr->link;
 		}
-		neww->link = curr->link;
-		curr = neww; 
+		
+		
+		if(prev == d->elems[val]){
+			neww->link = d->elems[val];
+			d->elems[val] = neww;
+		}else{
+			prev->link = neww;
+		}
+	
 	}
 	
 	d->count++;
@@ -70,11 +75,42 @@ bool addStudent(Dictionary *d, Student s){
 }
 
 bool removeStudent(Dictionary *d, Student s){
+	int val = getHash(s);
+	
+	if(d->elems[val] == NULL){
+		return false;
+	}else{
+		if(d->elems[val]->stud.studID != s.studID){
+			NodePtr curr = d->elems[val];
+			while(curr->link->stud.studID != s.studID){
+				curr=curr->link;
+			}
+			curr->link = NULL;
+		}else{
+			d->elems[val] = NULL;
+		}
+		d->count--;
+	}
+	
 	
 }
 
 Student getStudent(Dictionary d, Student s){
+	int val = getHash(s);
 	
+	if(d.elems[val] == NULL){
+		
+	}else{
+		if(d.elems[val]->stud.studID != s.studID){
+			NodePtr curr = d.elems[val];
+			while(curr->stud.studID != s.studID){
+				curr=curr->link;
+			}
+			return curr->stud;
+		}else{
+			return d.elems[val]->stud;
+		}
+	}
 }
 
 void visualize(Dictionary d){
@@ -88,9 +124,11 @@ void visualize(Dictionary d){
 		if(d.elems[i]==NULL){
 			printf("empty");
 		}else{
-			while(d.elems[i]->link!=NULL){
+			while(d.elems[i]!=NULL){
 				printf("{%s -- %d}", d.elems[i]->stud.studName, d.elems[i]->stud.studID);
+				d.elems[i] = d.elems[i]->link;
 			}
+			
 		}
 
 		
