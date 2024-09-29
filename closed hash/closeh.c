@@ -28,12 +28,11 @@ void init(StudDictionary *sd, int max){
 	}
 	
 }
-//	int pk = sd->max * .8;
+
 bool insert(StudDictionary *sd, Student s){
 	int coll = 0;
 	bool free = false;
 	
-	printf("%d", hash(s, sd->max));
 	if((sd->count + 1) < (sd->max * .8)){
 		
 		if(sd->data[hash(s, sd->max)].studID == 0){
@@ -50,22 +49,30 @@ bool insert(StudDictionary *sd, Student s){
 		sd->count++;
 		return true;
 	}else{
-		sd->data = realloc(sd->data, sizeof(Student) * (sd->max * 2));
-		sd->max *= 2;
 		
-		for(int i = sd->max/2; i < sd->max; i++){
-			sd->data[i].studID = 0;
-		}
+		int j=0;
 		
-		for(int i = 0; i < sd->max; i++){
+		Student *neww = malloc(sizeof(Student) * sd->max);
+		for(int i = 0; i<sd->max; i++){
 			if(sd->data[i].studID > 0){
-				insert(sd, sd->data[i]);
-			}else if(sd->data[i].studID == 0 || sd->data[i].studID == NULL){
-				sd->data[i].studID = 0;
-			}else if(sd->data[i].studID == -1){
-				sd->data[i].studID == -1;
+				neww[j] = sd->data[i];
+				j++;
 			}
 		}
+		
+		neww[j] = s;
+		
+		sd->data = realloc(sd->data, sizeof(Student) * (sd->max * 2));
+		sd->max *= 2;
+		sd->count = 0;
+		
+		for(int i=0; i<sd->max; i++){
+			sd->data[i].studID = 0;
+		}
+		for(int i = 0; i<j+1; i++){
+			insert(sd, neww[i]);
+		}
+		
 		
 		
 	}
@@ -74,7 +81,7 @@ bool insert(StudDictionary *sd, Student s){
 }
 
 bool removeStudent(StudDictionary *sd, Student s){
-	bool exists = true;
+	bool Nexists = false;
 	bool found = false;
 	int i = 1;
 	if(sd->data[hash(s, sd->max)].studID == s.studID){
@@ -83,9 +90,9 @@ bool removeStudent(StudDictionary *sd, Student s){
 		
 	}else{
 		
-		while(exists == true && found == false){
+		while(!Nexists && !found){
 			if(sd->data[((hash(s, sd->max)) + i) % sd->max].studID == 0){
-				exists = false;
+				Nexists = true;
 			}else if(sd->data[((hash(s, sd->max)) + i) % sd->max].studID == s.studID){
 				found = true;
 			}		
@@ -97,17 +104,29 @@ bool removeStudent(StudDictionary *sd, Student s){
 			return true;
 		}
 		
-		if(exists == false){
+		if(Nexists == true){
 			return false;
-		}
-		
-		
-		
+		}		
 	}
 
 }
 
-void get(StudDictionary *sd, int studentID){
+void get(StudDictionary *sd, Student s){
+	printf("\n-------------------------\n");
+	int i = 0;
+	while(sd->data[((hash(s, sd->max)) + i) % sd->max].studID != 0 && sd->data[((hash(s, sd->max)) + i) % sd->max].studID != s.studID){
+		i++;
+	}
+	
+	if(sd->data[((hash(s, sd->max)) + i) % sd->max].studID == 0){
+		printf("Does not exist\n");
+	}else{
+		printf("SD: %s - %d\n", sd->data[((hash(s, sd->max)) + i) % sd->max].studName, sd->data[((hash(s, sd->max)) + i) % sd->max].studID);
+	}
+	printf("-------------------------\n");
+	
+	
+	
 	
 }
 

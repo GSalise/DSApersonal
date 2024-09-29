@@ -20,7 +20,7 @@ int hash(Student s, int max);
 void init(StudDictionary *sd, int max);
 bool insert(StudDictionary *sd, Student s);
 bool removeStudent(StudDictionary *sd, Student s);
-void get(StudDictionary *sd, int studentID);
+void get(StudDictionary *sd, Student S);
 void visualize(StudDictionary sd);
 
 //make
