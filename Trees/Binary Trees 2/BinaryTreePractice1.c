@@ -119,14 +119,14 @@ int main(){
     inorder(b);
     search(b, 5);
     search(b,6);
-    b = deleteR(b, 7);
-    printf("\nAfter 7 delete\n");
-    inorder(b); 
-    deleteR(b, 5);
-    printf("\nAfter 5 delete\n");
-    inorder(b); 
+    // b = deleteR(b, 7);
+    // printf("\nAfter 7 delete\n");
+    // inorder(b); 
+    // deleteR(b, 5);
+    // printf("\nAfter 5 delete\n");
+    // inorder(b); 
     deleteR(b, 10);
-    printf("\nAfter 8 delete\n");
+    printf("\nAfter 10 delete\n");
     inorder(b); 
     return 0;
 }
