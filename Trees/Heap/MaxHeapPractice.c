@@ -45,6 +45,26 @@ int doesExist(MaxHeap h, int val){
 
 }
 
+void heapify(MaxHeap *h, int n){
+    int left = (2 * n) + 1;
+    int right = (2 * n) + 2;
+    int largest = n;
+
+    if(left < h->count && h->elems[largest] < h->elems[left]){
+        largest = left;
+    }
+
+    if(right < h->count && h->elems[largest] < h->elems[right]){
+        largest = right;
+    }
+
+    if(largest != n){
+        int temp = h->elems[n];
+        h->elems[n] = h->elems[largest];
+        h->elems[largest] = temp;
+        heapify(h, largest);
+    }
+}
 
 void delete(MaxHeap *h, int val){
     int n = doesExist(*h, val);
@@ -52,31 +72,10 @@ void delete(MaxHeap *h, int val){
     if(h->count > 0 && n > -1){
         h->elems[n] = h->elems[h->count - 1];
         h->count--;
-
-        while(1){
-            int left = (2 * n) + 1;
-            int right = (2 * n) + 2;
-            int largest = n;
-
-
-            if(left < h->count && h->elems[largest] < h->elems[left]){
-                largest = left;
-            }
-
-            if(right < h->count && h->elems[largest] < h->elems[right]){
-                largest = right;
-            }
-
-            if(largest != n){
-                int temp = h->elems[n];
-                h->elems[n] = h->elems[largest];
-                h->elems[largest] = temp;
-                n = largest;
-            }else{
-                break;
-            }
-
+        if(n < h->count){
+            heapify(h, n);
         }
+        
     }
 }
 
