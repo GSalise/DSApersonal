@@ -65,7 +65,6 @@ int doesExist(MinHeap h, int val){
     while(n<h.count && h.elems[n] != val){
         n++;
     }
-
     return (n < h.count) ? n : -1;
 }
 
