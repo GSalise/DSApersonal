@@ -75,8 +75,46 @@ void delete(MaxHeap *h, int val){
         if(n < h->count){
             heapify(h, n);
         }
-        
     }
+}
+
+/*
+    Heapsort is basically just a sorting algorithm for arrays
+    where you turn the array into a heap (either min or max)
+    then proceed to sort it by calling heapify.
+
+    What heapsort does is
+    1. Swap the root value with the rightmost value (i.e., last element of the array) of the tree
+    
+    2. We then decrease the count so that the swapped value (refering to the root value) will not be touched
+        - In our case since our heap is a max heap the array will be sorted into ascending order
+        - With the root value being the largest value in the entire heap moving it at the end of the
+        array making it the first value of the sorted array
+    
+    3. Heapify the heap
+        - We call heapify to restore the heap order
+        - This also moves the largest value of the current heap into the root
+        - Which will then be used to move the next position in the sorted array
+    
+    4. Repeat until i reaches goes out of bounds
+
+
+*/
+
+MaxHeap heapsort(MaxHeap *h){
+    MaxHeap neww = *h;
+
+    for(int i = neww.count - 1; i >=0; i--){
+        int temp = neww.elems[0];
+        neww.elems[0] = neww.elems[i];
+        neww.elems[i] = temp;
+        neww.count--;
+        heapify(&neww, 0);
+    }
+
+    neww.count = h->count;
+
+    return neww;
 }
 
 int main(){
@@ -97,6 +135,12 @@ int main(){
     delete(&h, 100);
     for(int i = 0; i<h.count; i++){
         printf("%d ", h.elems[i]);
+    }
+
+    printf("\n");
+    MaxHeap a = heapsort(&h);
+    for(int i = 0; i<a.count; i++){
+        printf("%d ", a.elems[i]);
     }
 
     return 0;
