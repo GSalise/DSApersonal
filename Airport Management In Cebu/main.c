@@ -1,28 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "amc.h"
-// typedef struct{
-//     int departure;
-//     int arrival;
-// }Schedule;
+#include "amc.c"
 
-// typedef struct{
-//     char airport[100];
-//     int priority;
-// }Destination;
-
-// typedef struct{
-//     char code[6];
-//     char aircraft[100];
-//     Schedule flightSched;
-//     Destination destination;
-// }NodeType, *NodePtr, *Flight;
-
-// typedef struct{
-//     Flight flight[10];
-//     int count;
-// }AMC;
 int main(){
     Destination a = createDest("Ninoy Aquino International Airport", 1);
     Destination b1 = createDest("Clark International Airport", 2);
@@ -53,11 +33,11 @@ int main(){
     Schedule sc9 = createSched("0600", "0730");
     Schedule sc10 = createSched("0130", "0200");
 
-    Flight flgt1 = createFlight("abc-505", "Boeing", sc1, a);
-    Flight flgt2 = createFlight("fac-375", "Airbus", sc5, e1);
-    Flight flgt3 = createFlight("mdf-185", "Mazda", sc2, b1);
-    Flight flgt4 = createFlight("jyu-385", "Sda", sc3, f1);
-    Flight flgt5 = createFlight("asd-058", "Aero", sc9, a);
+    Flight flgt1 = createFlight("abc-505", "Boeing", sc1, a);   //prio 1
+    Flight flgt2 = createFlight("fac-375", "Airbus", sc5, e1);  //prio 5
+    Flight flgt3 = createFlight("mdf-185", "Mazda", sc2, b1);   //prio 2
+    Flight flgt4 = createFlight("jyu-385", "Sda", sc3, f1);     //prio 6
+    Flight flgt5 = createFlight("asd-058", "Aero", sc9, a);     //prio 1
 
     AMC amc;
     initAMC(&amc);
@@ -67,8 +47,19 @@ int main(){
     insert(&amc, flgt4);
     insert(&amc, flgt5);
 
-    //something's wrong in insert
+    for(int i = 0; i<amc.count; i++){
+        printf("Code: %s\nDestination: %s\nPriority: %d", amc.flight[i]->code, amc.flight[i]->destination.airport, amc.flight[i]->destination.priority);
+        printf("\n\n");
+    }
 
+    printf("\n\n\n\n\n");
+
+    AMC amc2 = heapsort(&amc);
+
+    for(int i = 0; i<amc2.count; i++){
+        printf("Code: %s\nDestination: %s\nPriority: %d", amc2.flight[i]->code, amc2.flight[i]->destination.airport, amc2.flight[i]->destination.priority);
+        printf("\n\n");
+    }
 
 
     return 0;

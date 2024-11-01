@@ -43,23 +43,80 @@ void initAMC(AMC *a){
 
 void insert(AMC *a, Flight f){
     int n = a->count;
-    int parent = (n - 1) / 2;
 
-    while(n > 0 && a->flight[parent]->destination.priority >= f->destination.priority){
+    while(n > 0 && a->flight[(n - 1) / 2]->destination.priority <= f->destination.priority){
         
         //if the prio is the same then compare flight schedules
         //if the child has a higher value the loop continues otherwise quit
-        if(a->flight[parent]->destination.priority == f->destination.priority){
-            if(compareSched(a->flight[parent]->flightSched, f->flightSched) == -1){
+        if(a->flight[(n - 1) / 2]->destination.priority == f->destination.priority){
+            if(compareSched(a->flight[(n - 1) / 2]->flightSched, f->flightSched) == -1){
                 break;
             }
         }else{
-            a->flight[n] = a->flight[parent];
-            n = parent;
+            a->flight[n] = a->flight[(n - 1) / 2];
+            n = (n - 1) / 2;
         }
     }
 
     a->flight[n] = f;
     a->count++;
+}
+
+
+AMC heapsort(AMC *a){
+    AMC neww = *a;
+
+    for(int i = neww.count - 1; i>=0; i--){
+        Flight temp = malloc(sizeof(NodeType));
+        temp = neww.flight[0];
+
+        neww.flight[0] = neww.flight[i];
+        neww.flight[i] = temp;
+        neww.count--;
+        heapify(&neww, 0);
+    }
+
+    neww.count = a->count;
+
+    return neww;
+}
+
+void heapify(AMC *a, int n){
+    int left = (2 * n) + 1;
+    int right = (2 * n) + 2;
+    int lowest = n;
+
+    if(left < a->count && a->flight[left]->destination.priority >= a->flight[lowest]->destination.priority){
+
+        int leftprio = a->flight[left]->destination.priority;
+        int lowprio = a->flight[lowest]->destination.priority;
+
+        if(leftprio > lowprio || (leftprio == lowprio && compareSched(a->flight[left]->flightSched, a->flight[lowest]->flightSched) == 1 )){
+            lowest = left;
+        }
+    }
+
+    if(right < a->count && a->flight[right]->destination.priority >= a->flight[lowest]->destination.priority){
+
+        int rightprio = a->flight[right]->destination.priority;
+        int lowprio = a->flight[lowest]->destination.priority;
+
+        if(rightprio > lowprio || (rightprio == lowprio && compareSched(a->flight[right]->flightSched, a->flight[lowest]->flightSched) == 1 )){
+            lowest = right;
+        }
+    }
+
+    if(lowest != n){
+        Flight temp = malloc(sizeof(NodeType));
+
+        temp = a->flight[lowest];
+        a->flight[lowest] = a->flight[n];
+        a->flight[n] = temp;
+        heapify(a, lowest);
+    }
+}
+
+void printList(NodeType a){
+    printf("Code: %s\nAirport: %s\nAircraft: %s\nPriority: %d\n\n", a.code, a.destination.airport, a.aircraft, a.destination.priority);
 }
 

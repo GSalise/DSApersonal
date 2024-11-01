@@ -30,5 +30,8 @@ Flight createFlight(char *code, char *aircraft, Schedule flightSched, Destinatio
 int compareSched(Schedule a, Schedule b);
 void initAMC(AMC *a);
 void insert(AMC *a, Flight f);
+AMC heapsort(AMC *a);
+void heapify(AMC *a, int n);
+void printList(NodeType a);
 
 #endif
