@@ -58,10 +58,15 @@ int main(){
 
     FILE *fp;
 
+    char code[8];
+    printf("Welcome to AMC Flight Lists!\nTo view a list of flights that are in line ahead of yours, please enter your flight code.\nFlight Code: ");
+    scanf("%s", code);
+    printf("\n\n");
+
     fp = fopen("flight_list.dat", "wb");
 
     if(fp != NULL){
-        for(int i = 0; i<amc2.count; i++){
+        for(int i = 0; i<amc2.count  && strcmp(amc2.flight[i]->code, code) != 0; i++){
             fwrite(amc2.flight[i], sizeof(NodeType), 1, fp);
         }
     }
