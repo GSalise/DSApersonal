@@ -48,7 +48,7 @@ void solve(int matrix[5][5]){
 
 
 int main(){
-	int matrix[5][5]{
+	int matrix[5][5] = {
 		{0, INF, 2, INF, INF},
 		{INF, 0, 1, INF, 2},
 		{12, INF, 0, INF, 4},
